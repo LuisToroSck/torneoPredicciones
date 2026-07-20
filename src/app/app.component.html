@@ -24,7 +24,6 @@
       <p>No se encontraron documentos en la coleccion configurada.</p>
     </section>
   } @else {
-    <section class="table-card">
       <div class="table-header">
         <div>
           <h2>Tabla actual</h2>
@@ -32,13 +31,12 @@
       </div>
 
       <div class="table-scroll">
-        <table>
+        <table class="desktop-table">
           <thead>
             <tr>
               <th>Pos</th>
               <th>Jugador</th>
               <th>Pts</th>
-              <th>PJ</th>
               <th>G</th>
               <th>E</th>
               <th>P</th>
@@ -56,14 +54,15 @@
                     <span [class]="getMovimientoClase(posicion)">{{ getMovimientoTexto(posicion) }}</span>
                   </div>
                 </td>
-                <td>{{ posicion.jugador }}</td>
+                <td>{{ getNombreCorto(posicion.jugador) }}</td>
                 <td>
                   <div class="stacked-cell">
                     <span>{{ posicion.puntos }}</span>
-                    <span [class]="getDeltaPuntosClase(posicion)">{{ getDeltaPuntosTexto(posicion) }}</span>
+                    @if (hasDeltaPuntos(posicion)) {
+                      <span [class]="getDeltaPuntosClase(posicion)">{{ getDeltaPuntosTexto(posicion) }}</span>
+                    }
                   </div>
                 </td>
-                <td>{{ posicion.pj }}</td>
                 <td>{{ posicion.g }}</td>
                 <td>{{ posicion.e }}</td>
                 <td>{{ posicion.p }}</td>
@@ -75,6 +74,5 @@
           </tbody>
         </table>
       </div>
-    </section>
   }
 </main>

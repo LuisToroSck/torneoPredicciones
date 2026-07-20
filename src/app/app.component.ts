@@ -64,6 +64,14 @@ export class AppComponent {
       });
   }
 
+  hasDeltaPuntos(posicion: TablaPosicion): boolean {
+    return (posicion.deltaPuntos ?? 0) !== 0;
+  }
+
+  getNombreCorto(nombre: string): string {
+    return nombre.trim().split(/\s+/)[0] ?? nombre;
+  }
+
   getDeltaPuntosTexto(posicion: TablaPosicion): string {
     const delta = posicion.deltaPuntos ?? 0;
     return delta > 0 ? `+${delta}` : `${delta}`;
@@ -87,11 +95,11 @@ export class AppComponent {
     const cambio = Math.abs(posicion.cambioPosicion ?? 0);
 
     if (posicion.movimientoPosicion === 'up') {
-      return `▲${cambio}`;
+      return `+${cambio}`;
     }
 
     if (posicion.movimientoPosicion === 'down') {
-      return `▼${cambio}`;
+      return `-${cambio}`;
     }
 
     return '=';
