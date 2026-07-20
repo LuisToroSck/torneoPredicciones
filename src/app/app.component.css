@@ -101,20 +101,22 @@ code {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  text-align: center;
 }
 
 table {
-  width: 100%;
+  width: auto;
+  margin: 0 auto;
   border-collapse: collapse;
 }
 
 .desktop-table {
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 th,
 td {
-  padding: 0.75rem 0.4rem;
+  padding: 0.68rem 0.3rem;
   text-align: left;
   border-bottom: 1px solid rgba(148, 163, 184, 0.24);
 }
@@ -133,14 +135,14 @@ td {
 
 .desktop-table th:first-child,
 .desktop-table td:first-child {
-  width: 12%;
+  min-width: 2.7rem;
   text-align: center;
   white-space: nowrap;
 }
 
 .desktop-table th:nth-child(2),
 .desktop-table td:nth-child(2) {
-  width: 20%;
+  min-width: 4.1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -148,7 +150,7 @@ td {
 
 .desktop-table th:nth-child(n + 3),
 .desktop-table td:nth-child(n + 3) {
-  width: 9.6%;
+  min-width: 2.2rem;
   text-align: center;
   white-space: nowrap;
 }
@@ -220,7 +222,7 @@ tbody tr:hover {
 
   th,
   td {
-    padding: 0.95rem 0.75rem;
+    padding: 0.8rem 0.5rem;
   }
 
   th {
@@ -234,17 +236,17 @@ tbody tr:hover {
 
   .desktop-table th:first-child,
   .desktop-table td:first-child {
-    width: 11%;
+    min-width: 3rem;
   }
 
   .desktop-table th:nth-child(2),
   .desktop-table td:nth-child(2) {
-    width: 23%;
+    min-width: 5rem;
   }
 
   .desktop-table th:nth-child(n + 3),
   .desktop-table td:nth-child(n + 3) {
-    width: 9.4%;
+    min-width: 2.6rem;
   }
 
   .stacked-cell {
