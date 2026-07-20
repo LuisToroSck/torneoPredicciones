@@ -1,0 +1,80 @@
+<main class="landing">
+  <section class="hero">
+    <h1>{{ title }}</h1>
+    <p class="meta-update">Ultima actualizacion: <strong>{{ ultimaActualizacionTexto() }}</strong></p>
+  </section>
+
+  @if (loading()) {
+    <section class="feedback-card">
+      <span class="status-label">Cargando</span>
+      <p>Consultando la tabla de posiciones en Firestore...</p>
+    </section>
+  } @else if (errorMessage()) {
+    <section class="feedback-card feedback-card--error">
+      <span class="status-label">Conexion</span>
+      <p>{{ errorMessage() }}</p>
+      <p class="hint">
+        Completa <code>src/app/firebase/firebase.config.ts</code> y confirma si la coleccion es
+        <code>tablaPosicion</code> o <code>tablaPosiciones</code>.
+      </p>
+    </section>
+  } @else if (posiciones().length === 0) {
+    <section class="feedback-card">
+      <span class="status-label">Sin datos</span>
+      <p>No se encontraron documentos en la coleccion configurada.</p>
+    </section>
+  } @else {
+    <section class="table-card">
+      <div class="table-header">
+        <div>
+          <h2>Tabla actual</h2>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Jugador</th>
+              <th>Pts</th>
+              <th>PJ</th>
+              <th>G</th>
+              <th>E</th>
+              <th>P</th>
+              <th>GF</th>
+              <th>GC</th>
+              <th>DG</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (posicion of posiciones(); track posicion.id; let i = $index) {
+              <tr>
+                <td>
+                  <div class="stacked-cell">
+                    <span>{{ i + 1 }}°</span>
+                    <span [class]="getMovimientoClase(posicion)">{{ getMovimientoTexto(posicion) }}</span>
+                  </div>
+                </td>
+                <td>{{ posicion.jugador }}</td>
+                <td>
+                  <div class="stacked-cell">
+                    <span>{{ posicion.puntos }}</span>
+                    <span [class]="getDeltaPuntosClase(posicion)">{{ getDeltaPuntosTexto(posicion) }}</span>
+                  </div>
+                </td>
+                <td>{{ posicion.pj }}</td>
+                <td>{{ posicion.g }}</td>
+                <td>{{ posicion.e }}</td>
+                <td>{{ posicion.p }}</td>
+                <td>{{ posicion.gf }}</td>
+                <td>{{ posicion.gc }}</td>
+                <td>{{ posicion.dg }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+</main>
